@@ -1,21 +1,66 @@
-let tx = 0;
+let tx = 300;
+let ty = 150;
+let velocidad = 3;
+
 function setup() {
- createCanvas(600, 300);
- rectMode(CENTER);
+  createCanvas(600, 300);
+  rectMode(CENTER);
 }
+
 function draw() {
- background(240);
- tx += 2;
- push();
- translate(tx, 100); // mueve TODO lo que dibujes dentro del push/pop
- fill(200, 80, 80);
- rect(150, 150, 120, 60);
- fill(80, 120, 200);
- circle(150, 110, 40);
- pop();
+  background(220);
+
+  moverPersonaje();
+  dibujarPersonaje();
 }
-let x = 50, y = 120;
-let vx = 2, vy = 1;
-function setup() {
- createCanvas(600, 300);
+
+function moverPersonaje() {
+  // WASD
+  if (keyIsDown(65)) { // A
+    tx -= velocidad;
+  }
+  if (keyIsDown(68)) { // D
+    tx += velocidad;
+  }
+  if (keyIsDown(87)) { // W
+    ty -= velocidad;
+  }
+  if (keyIsDown(83)) { // S
+    ty += velocidad;
+  }
+
+  // Flechas
+  if (keyIsDown(LEFT_ARROW)) {
+    tx -= velocidad;
+  }
+  if (keyIsDown(RIGHT_ARROW)) {
+    tx += velocidad;
+  }
+  if (keyIsDown(UP_ARROW)) {
+    ty -= velocidad;
+  }
+  if (keyIsDown(DOWN_ARROW)) {
+    ty += velocidad;
+  }
+}
+
+function dibujarPersonaje() {
+
+  push();                 // 🔹 empieza transformación
+  translate(tx, ty);      // 🔹 mueve TODO el personaje
+
+  // 🟢 Cuerpo
+  fill(100, 150, 255);
+  rect(0, 40, 40, 80);
+
+  // 🟡 Cabeza
+  fill(255, 220, 180);
+  circle(0, -20, 50);
+
+  // ⚫ Ojos
+  fill(0);
+  circle(-10, -25, 8);
+  circle(10, -25, 8);
+
+  pop();                  // 🔹 termina transformación
 }
